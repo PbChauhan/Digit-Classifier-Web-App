@@ -8,11 +8,15 @@
     <title>Home</title>
 </head>
 <body>
-    <div id="paint">
-        <h4>Draw something in box</h4>
-        <canvas id="myCanvas" width=112px height=112px style="border: 2px solid black;"></canvas>
-        <h5 id="predict"></h5>
-        <button onclick="predict()" class="btn btn-secondary">Predict</button>
+    <div class="container">
+        <div class="col-md-8 col-lg-12">
+            <div id="paint">
+                <h4>Draw something in box</h4>
+                <canvas id="myCanvas" width=112px height=112px style="border: 2px solid black;"></canvas>
+                <h5 id="predict"></h5>
+                <button onclick="predict()" class="btn btn-secondary">Predict</button>
+            </div>
+        </div>
     </div>
     <script>
         var canvas = document.getElementById('myCanvas');
