@@ -1,76 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Home</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Home</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <div class="col-md-8 col-lg-12">
-            <div id="paint">
+    <!-- <div class="container">
+        <div class="col-md-8 col-lg-12"> -->
+            <center><h1 style="">REAL TIME DIGIT RECOGNITION WEB APP</h1></center>
+            <img src="../static/image/background.jpg" width = "100%" height = 250px style="opacity: 0.8;" alt="">
+            <center><div id="paint">
                 <h4>Draw something in box</h4>
                 <canvas id="myCanvas" width=112px height=112px style="border: 2px solid black;"></canvas>
-                <h5 id="predict"></h5>
-                <button onclick="predict()" class="btn btn-secondary">Predict</button>
-            </div>
-        </div>
-    </div>
-    <script>
-        var canvas = document.getElementById('myCanvas');
-        var ctx = canvas.getContext('2d');
-        
-        var painting = document.getElementById('paint');
-        var paint_style = getComputedStyle(painting);
-
-        var mouse = {x: 0, y: 0};
-        
-        canvas.addEventListener('mousemove', function(e) {
-        mouse.x = e.pageX - this.offsetLeft;
-        mouse.y = e.pageY - this.offsetTop;
-        }, false);
-
-        ctx.lineWidth = 3;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = '#000000';
-        
-        canvas.addEventListener('mousedown', function(e) {
-            ctx.beginPath();
-            ctx.moveTo(mouse.x, mouse.y);
-        
-            canvas.addEventListener('mousemove', onPaint, false);
-        }, false);
-        
-        canvas.addEventListener('mouseup', function() {
-            canvas.removeEventListener('mousemove', onPaint, false);
-        }, false);
-        
-        var onPaint = function() {
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.stroke();
-        };
-        let x_pred = [];
-        function predict(){
-            const img = ctx.getImageData(0,0,28*4,28*4);
-            for(var i = 0; i < img.data.length ; i += 4){
-                x_pred.push(img.data[i+3]);
-            }
-            console.log(x_pred);
-        x_predict = {"x" : JSON.stringify(x_pred)};
-        x_predict = JSON.stringify(x_predict);
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://127.0.0.1:5000/predict', true);
-        xhr.getResponseHeader('content-type','application/json');
-        xhr.onload = function(){
-            console.log(this.responseText);
-            document.getElementById('predict').innerHTML = "Predicted Value is " + this.responseText[1];
-        }
-        xhr.send(JSON.stringify(x_predict))
-        }
-    </script>
-
+                <br>
+                <h5 id="predict" style="position: absolute;padding-left: 45%;"></h5>
+                <br>
+                <br>
+                <button onclick="predict()" class="btn btn-primary">Predict</button>
+                <form action="/" method="post">
+                    <br>
+                    <label>Enter your expected digit to help us improve the predictions</label>
+                    <input type="number" name="val">
+                    <button class="btn btn-danger" type="submit">Submit</button>
+                    <br>
+                </form>
+            </div></center>
+        <!-- </div>
+    </div> -->
+    <script src="../static/index.js"></script>
+            
 </body>
 </html>
