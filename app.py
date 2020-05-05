@@ -1,4 +1,4 @@
-from keras.models import model_from_json
+import tensorflow as tf
 from flask import Flask, render_template, redirect, request
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,7 +9,7 @@ app = Flask(__name__)
 json_file = open('model.json', 'r')
 model_json = json_file.read()
 json_file.close()
-loaded_model = model_from_json(model_json)
+loaded_model = tf.keras.models.model_from_json(model_json)
 loaded_model.load_weights('model.h5')
 
 @app.route('/', methods = ['GET','POST'])
@@ -32,6 +32,7 @@ def pred():
         arr_X = np.reshape(np.array(li_X, dtype = 'float'), (1,28*4,28*4))[0,:,:]
         arr_X = cv2.resize(arr_X, (28*1,28*1))
         plt.imsave("./static/image/predict.png", arr_X)
+        #arr_X = np.reshape(arr_X , (1,74))
         arr_X = np.reshape(arr_X, (1,28*1,28*1,1))
         ans = loaded_model.predict(arr_X)
         ans = np.argmax(ans, axis = 1)
