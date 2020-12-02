@@ -4,7 +4,7 @@ You can train your own model and replace the Model.json with your model info and
 You can resize the training set according to your comfort. I have trained the model on 28 X 28 pixels of input size.
 I didn't use transfer-learning as it requires very basic model to train this dataset with a accuracy of 99% on validation set.
 Some results are -
-![](static/image/filename%201.JPG]
+![](static/image/1.JPG]
 
 # For MNIST Dataset and other models
 visit http://yann.lecun.com/exdb/mnist/
